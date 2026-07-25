@@ -11,6 +11,14 @@ app.get("/api/v1/health", (req, res) => {
   });
 });
 
+app.get("/api/v1/req", (req, res) => {
+  console.log(req)
+  res.json({
+    success: true,
+    message: "req printed in console",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`Health: GET http://localhost:${PORT}/api/v1/health`);
