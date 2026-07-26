@@ -9,7 +9,7 @@ app.get("/api/v1/health", (req, res) => {
   console.log(req.headers)
   res.json({
     success: true,
-    message: "All systems running on an optimal protocol.",
+    message: "All systems running on an branch 2.",
   });
 });
 
