@@ -1,0 +1,50 @@
+# Workflow name (shown in GitHub Actions)
+name: CI/CD
+
+# When should this workflow run?
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# What jobs should run?
+jobs:
+  build:
+    # Which machine to use
+    runs-on: ubuntu-latest
+
+    # Steps executed one by one
+    steps:
+      # 1. Download your repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install the required runtime
+      - name: Setup Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Check code quality (optional)
+      - name: Lint
+        run: npm run lint
+
+      # 5. Run tests
+      - name: Test
+        run: npm test
+
+      # 6. Build the project
+      - name: Build
+        run: npm run build
+
+      # 7. Deploy (only on main branch)
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Deploying..."
+          # Your deployment command goes here
